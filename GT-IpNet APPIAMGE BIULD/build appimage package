@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+APP=GT-IpNet
+APPDIR=GT-IpNet.AppDir
+ICON_PATH="$APPDIR/usr/share/icons/hicolor/256x256/apps/gt-ipnet-icon.png"
+DESKTOP_FILE="$APPDIR/usr/share/applications/gt-ipnet.desktop"
+
+chmod +x "$APPDIR/usr/bin/GT-IpNet"
+chmod +x "$APPDIR/AppRun"
+
+# حذف الرابط الرمزي إذا كان موجودًا
+[ -L "$APPDIR/gt-ipnet.desktop" ] && rm "$APPDIR/gt-ipnet.desktop"
+
+ARCH=x86_64 ./linuxdeploy-x86_64.AppImage \
+  --appdir "$APPDIR" \
+  --output appimage \
+  --icon-file "$ICON_PATH" \
+  --desktop-file "$DESKTOP_FILE"
+
+echo "✅ تم توليد حزمة GT-IpNet بنجاح!"

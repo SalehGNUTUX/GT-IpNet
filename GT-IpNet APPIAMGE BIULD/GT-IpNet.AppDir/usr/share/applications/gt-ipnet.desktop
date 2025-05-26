@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=GT-IpNet - Network Controller
+Name[ar]=GT-IpNet - أداة تحكم الشبكة
+Comment=Control network devices speed and blocking
+Comment[ar]=أداة للتحكم بسرعة وحظر الأجهزة على الشبكة
+Exec=sh -c "bash usr/bin/GT-IpNet.sh; read -p 'اضغط Enter للخروج...'"
+Icon=gt-ipnet-icon
+Terminal=true
+Type=Application
+Categories=Network;Utility;
+StartupNotify=true
