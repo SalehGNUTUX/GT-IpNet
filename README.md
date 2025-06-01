@@ -6,7 +6,7 @@
 ![GPLv2 License](https://img.shields.io/badge/license-GPLv2-blue)
 ![Latest Release](https://img.shields.io/badge/version-0.1-green)
 
-<img src="[https://github.com/SalehGNUTUX/GT-IpNet/raw/main/screenshots/main_menu.png](https://github.com/SalehGNUTUX/GT-IpNet/blob/main/GT-IpNet%20APPIAMGE%20BIULD/gt-ipnet-icon.png)" width="400" alt="واجهة GT-IpNet">
+<img src="[[https://github.com/SalehGNUTUX/GT-IpNet/raw/main/screenshots/main_menu.png](https://github.com/SalehGNUTUX/GT-IpNet/blob/main/GT-IpNet%20APPIAMGE%20BIULD/gt-ipnet-icon.png](https://github.com/SalehGNUTUX/GT-IpNet/blob/main/GT-IpNet%20APPIAMGE%20BIULD/gt-ipnet-icon.png))" width="400" alt="واجهة GT-IpNet">
 
 إليك لائحة المزايا مصنفة لكل لغة على حدة مع رموز تعبيرية جذابة:
 
