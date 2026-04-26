@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* ── Design tokens ────────────────────────────────────────── */
+:root {
+  --amber:       #F5B800;
+  --purple:      #3B2D9C;
+  --blue:        #2B5FC4;
+  --bg-0:        #0D1117;
+  --bg-1:        #161B22;
+  --bg-2:        #1C2128;
+  --bg-3:        #21262D;
+  --border:      #30363D;
+  --border-2:    #3D444D;
+  --fg-0:        #E6EDF3;
+  --fg-1:        #B3BAC2;
+  --fg-2:        #6E7681;
+  --green:       #3FB950;
+  --red:         #F85149;
+  --yellow:      #E3B341;
+  --cyan:        #79C0FF;
+  --magenta:     #D2A8FF;
+  --orange:      #FFA657;
+
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  --font-ui:   'Ubuntu Arabic', 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  background: #0D1117;
+  color: #E6EDF3;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #0D1117; }
+::-webkit-scrollbar-thumb { background: #30363D; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3D444D; }
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection { background: rgba(245,184,0,0.25); }
+
+/* ── Font loading (Google Fonts via link tag) ────────────── */
+@font-face {
+  font-family: 'Fira Code';
+  font-display: swap;
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-fade   { animation: fadeIn 0.2s ease; }
+.animate-slide  { animation: slideIn 0.2s ease; }
+.animate-spin   { animation: spin 0.8s linear infinite; }
+.animate-pulse  { animation: pulse 1.5s ease infinite; }
+
+/* ── Window drag regions ─────────────────────────────────── */
+.titlebar-drag { -webkit-app-region: drag; }
+.no-drag       { -webkit-app-region: no-drag; }
+
+/* ── RTL ─────────────────────────────────────────────────── */
+[dir="rtl"] {
+  font-family: 'Ubuntu Arabic', 'Noto Sans Arabic', var(--font-ui);
+}
+
+/* ── Focus ring ──────────────────────────────────────────── */
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ── Suppress extra outlines on custom buttons ───────────── */
+button { outline: none; }
+
+/* ── Table reset ─────────────────────────────────────────── */
+table { border-spacing: 0; }

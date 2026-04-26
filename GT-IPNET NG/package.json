@@ -1,0 +1,102 @@
+{
+  "name": "gt-ipnet",
+  "version": "1.0.0",
+  "description": "GT-IpNet — Network Diagnostic & Management Tool for GNU/Linux",
+  "main": "out/main/index.js",
+  "homepage": "https://github.com/SalehGNUTUX/GT-IpNet",
+  "author": {
+    "name": "GNUTUX",
+    "email": "gnutux.arabic@gmail.com",
+    "url": "https://github.com/SalehGNUTUX"
+  },
+  "license": "GPL-2.0",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "build:linux": "npm run build && electron-builder --linux",
+    "build:appimage": "npm run build && electron-builder --linux AppImage",
+    "build:deb": "npm run build && electron-builder --linux deb",
+    "build:rpm": "npm run build && electron-builder --linux rpm",
+    "build:all": "bash scripts/build-all.sh",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.0",
+    "lucide-react": "^0.400.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@electron-toolkit/eslint-config-ts": "^2.0.0",
+    "@electron-toolkit/preload": "^3.0.0",
+    "@electron-toolkit/utils": "^3.0.0",
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4"
+  },
+  "build": {
+    "appId": "org.gnutux.gt-ipnet",
+    "productName": "GT-IpNet",
+    "copyright": "Copyright © 2026 GNUTUX",
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "resources", "to": ".", "filter": ["**/*"] }
+    ],
+    "linux": {
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb",      "arch": ["x64"] },
+        { "target": "rpm",      "arch": ["x64"] }
+      ],
+      "category": "Network;System;",
+      "icon": "build/icons",
+      "executableName": "gt-ipnet",
+      "maintainer": "GNUTUX <gnutux.arabic@gmail.com>",
+      "vendor": "GNUTUX",
+      "synopsis": "Network Diagnostic & Management Tool for GNU/Linux",
+      "desktop": {
+        "Name": "GT-IpNet",
+        "Name[ar]": "جي تي - إيبنت",
+        "Comment": "Network Diagnostic & Management Tool for GNU/Linux",
+        "Comment[ar]": "أداة تشخيص وإدارة الشبكة المحلية",
+        "Keywords": "network;ip;scan;diagnostic;ping;traceroute;",
+        "Keywords[ar]": "شبكة;فحص;تشخيص;بينج;",
+        "Categories": "Network;System;",
+        "StartupWMClass": "gt-ipnet"
+      }
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.AppImage"
+    },
+    "deb": {
+      "depends": ["libnotify4", "libgtk-3-0", "libasound2 | libasound2t64"],
+      "artifactName": "${productName}_${version}_${arch}.deb"
+    },
+    "rpm": {
+      "depends": ["libnotify", "gtk3"],
+      "artifactName": "${productName}-${version}.${arch}.rpm"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
