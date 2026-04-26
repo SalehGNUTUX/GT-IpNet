@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT-IpNet | متحكم الشبكة المتقدم - GNU/Linux</title>
+
+    <!-- Tailwind CSS + Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-deep: #0a0b0e;
+            --bg-card: #13161a;
+            --border-color: #2a2d35;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --cyan: #79C0FF;
+            --green: #3FB950;
+            --amber: #F5B800;
+            --red: #F85149;
+            --purple: #BC8CFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(121, 192, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(121, 192, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: center center;
+        }
+
+        /* Glow effects */
+        .glow-cyan {
+            box-shadow: 0 0 25px rgba(121, 192, 255, 0.15);
+            border: 1px solid rgba(121, 192, 255, 0.25);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 20px rgba(63, 185, 80, 0.15);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        /* Terminal Window Frame */
+        .terminal-frame {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .terminal-header {
+            background: #161b22;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            color: #c9d1d9;
+            background: #0d1117;
+            overflow-x: auto;
+        }
+
+        .blink-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: var(--green);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Glitch hover on main title */
+        .glitch-text:hover {
+            text-shadow:
+                2px 0px var(--cyan),
+                -2px 0px var(--purple);
+            transition: text-shadow 0.2s ease;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 3px;
+        }
+
+        /* Button animations */
+        .download-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .download-btn:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 8px 25px -5px rgba(121, 192, 255, 0.3);
+            transform: translateY(-3px);
+            background: rgba(121, 192, 255, 0.05);
+        }
+
+        .badge-linux {
+            background: rgba(63, 185, 80, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sha-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            background: #0d1117;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #8b949e;
+            word-break: break-all;
+            border: 1px solid #21262d;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 backdrop-blur-md bg-[#0a0b0e]/80 border-b border-[#2a2d35]">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="icon.png" alt="GT-IpNet Icon" class="w-10 h-10 rounded-lg shadow-lg border border-[#2a2d35]">
+                <span class="text-xl font-bold tracking-tight">
+                    <span class="text-[#79C0FF]">GT-</span><span class="text-white">IpNet</span>
+                    <span class="text-xs text-[#3FB950] ml-2 font-mono">v1.0.0</span>
+                </span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm text-[#8b949e]">
+                <a href="#features" class="hover:text-white transition-colors">الميزات</a>
+                <a href="#downloads" class="hover:text-white transition-colors">التحميل</a>
+                <a href="#terminal" class="hover:text-white transition-colors">النسخة الطرفية</a>
+                <a href="#stack" class="hover:text-white transition-colors">التقنيات</a>
+                <a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="hover:text-white transition-colors">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-[#79C0FF] rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-[#3FB950] rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 badge-linux mb-6 text-base">
+                <i class="fab fa-linux"></i> حصرياً على GNU/Linux
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 glitch-text tracking-tight">
+                متحكم الشبكة <span class="text-[#79C0FF]">المتقدم</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-[#8b949e] max-w-3xl mx-auto mb-10 leading-relaxed">
+                واجهة رسومية حديثة لتشخيص وإدارة الشبكة المحلية. اكتشف الأجهزة، افحص المنافذ، قس السرعة، وكل ذلك بأمان تام.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <a href="#downloads" class="px-8 py-4 bg-[#79C0FF] text-black font-bold rounded-lg hover:bg-[#a5d0ff] transition-all shadow-lg hover:shadow-[#79C0FF]/30 text-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> حمّل الآن
+                </a>
+                <a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="px-8 py-4 border border-[#30363d] rounded-lg hover:border-[#79C0FF] transition-all text-lg flex items-center justify-center gap-2">
+                    <i class="fab fa-github"></i> الكود المصدري
+                </a>
+            </div>
+
+            <!-- Terminal Preview -->
+            <div class="max-w-2xl mx-auto terminal-frame text-left" dir="ltr">
+                <div class="terminal-header">
+                    <div class="terminal-dot bg-[#F85149]"></div>
+                    <div class="terminal-dot bg-[#F5B800]"></div>
+                    <div class="terminal-dot bg-[#3FB950]"></div>
+                    <span class="text-xs text-[#8b949e] ml-2 font-mono">~/GT-IpNet</span>
+                </div>
+                <div class="terminal-body text-sm md:text-base">
+                    <span class="text-[#3FB950]">gnutux@debian</span>:<span class="text-[#79C0FF]">~</span>$ ./GT-IpNet --scan<br>
+                    <span class="text-[#8b949e]">[INFO]</span> Starting network discovery on wlan0...<br>
+                    <span class="text-[#79C0FF]">[DISCOVERY]</span> Found 12 devices (2.4s)<br>
+                    <span class="text-[#3FB950]">✓</span> 192.168.1.1 - Gateway (Router) - 00:11:22:33:44:55<br>
+                    <span class="text-[#3FB950]">✓</span> 192.168.1.105 - iPhone 13 Pro - AA:BB:CC:DD:EE:FF<br>
+                    <span class="text-white">Ready for advanced diagnostics.</span><span class="blink-cursor"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">أدوات <span class="text-[#79C0FF]">شبكية</span> متكاملة</h2>
+            <p class="text-xl text-[#8b949e]">الجمع بين قوة `arp-scan` و `nmap` في واجهة رسومية ثنائية اللغة.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#79C0FF]/40 transition-all duration-300 glow-cyan">
+                <div class="text-4xl mb-5 text-[#79C0FF]"><i class="fas fa-satellite-dish"></i></div>
+                <h3 class="text-2xl font-bold mb-3">اكتشاف الأجهزة الذكي</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    فحص سريع (arp-scan) أو شامل (nmap). يتعرف على نوع الجهاز (iPhone, Android, Router) عبر OUI و mDNS تلقائياً.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#79C0FF]/10 text-[#79C0FF] px-3 py-1 rounded-full border border-[#79C0FF]/20">ARP Scan</span>
+                    <span class="text-xs bg-[#BC8CFF]/10 text-[#BC8CFF] px-3 py-1 rounded-full border border-[#BC8CFF]/20">Nmap</span>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#3FB950]/40 transition-all duration-300">
+                <div class="text-4xl mb-5 text-[#3FB950]"><i class="fas fa-tachometer-alt"></i></div>
+                <h3 class="text-2xl font-bold mb-3">قياس سرعة الإنترنت</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    اختبار دقيق لسرعة التحميل والرفع باستخدام `speedtest-cli` مع عرض مباشر للنتائج وحفظها تلقائياً.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#3FB950]/10 text-[#3FB950] px-3 py-1 rounded-full border border-[#3FB950]/20">Speedtest</span>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#F5B800]/40 transition-all duration-300">
+                <div class="text-4xl mb-5 text-[#F5B800]"><i class="fas fa-shield-haltered"></i></div>
+                <h3 class="text-2xl font-bold mb-3">فحص المنافذ المتقدم</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    استكشاف المنافذ المفتوحة عبر `ss` و `nmap` مع إمكانية فحص منفذ واحد أو نطاق كامل.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#F5B800]/10 text-[#F5B800] px-3 py-1 rounded-full border border-[#F5B800]/20">Port Scan</span>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#79C0FF]/40 transition-all duration-300">
+                <div class="text-4xl mb-5 text-[#79C0FF]"><i class="fas fa-route"></i></div>
+                <h3 class="text-2xl font-bold mb-3">تشخيص DNS و Traceroute</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    اختبار خوادم DNS، تتبع مسار الحزم، و Ping متقدم لتحليل استقرار الاتصال.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#79C0FF]/10 text-[#79C0FF] px-3 py-1 rounded-full border border-[#79C0FF]/20">MTR</span>
+                    <span class="text-xs bg-[#BC8CFF]/10 text-[#BC8CFF] px-3 py-1 rounded-full border border-[#BC8CFF]/20">Dig</span>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#3FB950]/40 transition-all duration-300">
+                <div class="text-4xl mb-5 text-[#3FB950]"><i class="fas fa-language"></i></div>
+                <h3 class="text-2xl font-bold mb-3">واجهة ثنائية اللغة</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    دعم كامل للغة العربية والإنجليزية مع اتجاه RTL، واجهة محلية بالكامل باستخدام قاموس مدمج.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#3FB950]/10 text-[#3FB950] px-3 py-1 rounded-full border border-[#3FB950]/20">🇲🇦 العربية</span>
+                    <span class="text-xs bg-[#79C0FF]/10 text-[#79C0FF] px-3 py-1 rounded-full border border-[#79C0FF]/20">🇺🇸 English</span>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="bg-[#13161a] border border-[#2a2d35] rounded-2xl p-8 hover:border-[#F85149]/40 transition-all duration-300">
+                <div class="text-4xl mb-5 text-[#F85149]"><i class="fas fa-user-shield"></i></div>
+                <h3 class="text-2xl font-bold mb-3">صلاحيات ذكية</h3>
+                <p class="text-[#8b949e] leading-relaxed">
+                    تصاعد تلقائي للصلاحيات (sudo/pkexec) عند الحاجة فقط. لا يعمل كـ root بشكل دائم.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs bg-[#F85149]/10 text-[#F85149] px-3 py-1 rounded-full border border-[#F85149]/20">pkexec</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Section -->
+    <section id="downloads" class="py-20 bg-[#0d1117]/50 border-y border-[#2a2d35]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">نزّل <span class="text-[#3FB950]">الإصدار 1.0.0</span></h2>
+                <p class="text-xl text-[#8b949e]">اختر الحزمة المناسبة لتوزيعتك. جميع الحزم موقعة ومفحوصة.</p>
+                <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/tag/gt-ipnet-1.0" target="_blank" class="text-[#79C0FF] hover:underline mt-2 inline-block">
+                    <i class="fab fa-github"></i> صفحة الإصدار على GitHub
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- AppImage -->
+                <div class="download-btn rounded-2xl p-8 text-center relative group">
+                    <i class="fa-brands fa-linux text-5xl text-[#F5B800] mb-5"></i>
+                    <h3 class="text-2xl font-bold mb-2">AppImage</h3>
+                    <p class="text-sm text-[#8b949e] mb-4">لجميع التوزيعات (محمول)</p>
+                    <span class="text-xs bg-[#F5B800]/10 text-[#F5B800] px-3 py-1 rounded-full">105 MB</span>
+
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet-1.0.0-x86_64.AppImage" class="block w-full mt-6 bg-[#79C0FF] text-black font-bold py-3 rounded-lg hover:bg-[#a5d0ff] transition-colors">
+                        <i class="fas fa-download"></i> تحميل AppImage
+                    </a>
+
+                    <div class="mt-4 sha-badge text-left" dir="ltr">
+                        <span class="text-[#79C0FF]">SHA256:</span><br>
+                        1b23a6e81130185b53...
+                    </div>
+                </div>
+
+                <!-- RPM -->
+                <div class="download-btn rounded-2xl p-8 text-center relative group">
+                    <i class="fa-brands fa-redhat text-5xl text-[#F85149] mb-5"></i>
+                    <h3 class="text-2xl font-bold mb-2">RPM Package</h3>
+                    <p class="text-sm text-[#8b949e] mb-4">Fedora / RHEL / openSUSE</p>
+                    <span class="text-xs bg-[#F85149]/10 text-[#F85149] px-3 py-1 rounded-full">103 MB</span>
+
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/gt-ipnet-1.0.0.x86_64.rpm" class="block w-full mt-6 bg-[#79C0FF] text-black font-bold py-3 rounded-lg hover:bg-[#a5d0ff] transition-colors">
+                        <i class="fas fa-download"></i> تحميل RPM
+                    </a>
+
+                    <div class="mt-4 sha-badge text-left" dir="ltr">
+                        <span class="text-[#79C0FF]">SHA256:</span><br>
+                        2613a5fe86f3e979a6...
+                    </div>
+                </div>
+
+                <!-- DEB -->
+                <div class="download-btn rounded-2xl p-8 text-center relative group">
+                    <i class="fa-brands fa-debian text-5xl text-[#BC8CFF] mb-5"></i>
+                    <h3 class="text-2xl font-bold mb-2">DEB Package</h3>
+                    <p class="text-sm text-[#8b949e] mb-4">Debian / Ubuntu / Mint</p>
+                    <span class="text-xs bg-[#BC8CFF]/10 text-[#BC8CFF] px-3 py-1 rounded-full">72.3 MB</span>
+
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet_1.0.0_amd64.deb" class="block w-full mt-6 bg-[#79C0FF] text-black font-bold py-3 rounded-lg hover:bg-[#a5d0ff] transition-colors">
+                        <i class="fas fa-download"></i> تحميل DEB
+                    </a>
+
+                    <div class="mt-4 sha-badge text-left" dir="ltr">
+                        <span class="text-[#79C0FF]">SHA256:</span><br>
+                        601ff6acbedb355e4c...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Install Commands -->
+            <div class="max-w-2xl mx-auto mt-16 terminal-frame text-left" dir="ltr">
+                <div class="terminal-header">
+                    <span class="text-xs text-[#8b949e] font-mono">⚡ Quick Terminal Install</span>
+                </div>
+                <div class="terminal-body text-sm">
+                    <span class="text-[#8b949e]"># AppImage (Recommended)</span><br>
+                    <span class="text-white">wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet-1.0.0-x86_64.AppImage</span><br>
+                    <span class="text-white">chmod +x GT-IpNet-1.0.0-x86_64.AppImage</span><br>
+                    <span class="text-white">./GT-IpNet-1.0.0-x86_64.AppImage</span><br><br>
+                    <span class="text-[#8b949e]"># Or install DEB package</span><br>
+                    <span class="text-white">sudo dpkg -i GT-IpNet_1.0.0_amd64.deb</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Edition Section -->
+    <section id="terminal" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <div class="inline-flex items-center gap-2 badge-linux mb-6">
+                    <i class="fas fa-terminal"></i> النسخة الطرفية الكلاسيكية
+                </div>
+                <h2 class="text-4xl font-bold mb-6">محبّذ <span class="text-[#3FB950]">للطرفية</span>؟</h2>
+                <p class="text-lg text-[#8b949e] mb-6 leading-relaxed">
+                    GT-IpNet بدأ كبرنامج نصي للطرفية (Shell Script) ولا يزال متاحاً للمستخدمين المتقدمين. النسخة القديمة تدعم جميع الميزات الأساسية مباشرة من سطر الأوامر.
+                </p>
+                <ul class="space-y-4 text-[#c9d1d9]">
+                    <li class="flex items-center gap-3">
+                        <span class="text-[#3FB950]"><i class="fas fa-check-circle"></i></span>
+                        مسح الشبكة: <code class="bg-[#161b22] px-2 py-1 rounded text-[#79C0FF] font-mono">./GT-IpNet --scan</code>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-[#3FB950]"><i class="fas fa-check-circle"></i></span>
+                        إنشاء تقرير فوري: <code class="bg-[#161b22] px-2 py-1 rounded text-[#79C0FF] font-mono">./GT-IpNet --report</code>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-[#3FB950]"><i class="fas fa-check-circle"></i></span>
+                        تحديد اللغة: <code class="bg-[#161b22] px-2 py-1 rounded text-[#79C0FF] font-mono">LANG=ar ./GT-IpNet</code>
+                    </li>
+                </ul>
+                <a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="inline-flex items-center gap-2 mt-8 px-6 py-3 border border-[#30363d] rounded-lg hover:border-[#3FB950] transition-all">
+                    <i class="fab fa-github"></i> استعراض الكود المصدري للنسخة الطرفية
+                </a>
+            </div>
+            <div class="lg:w-1/2 w-full terminal-frame">
+                <div class="terminal-header">
+                    <div class="terminal-dot bg-[#F85149]"></div>
+                    <div class="terminal-dot bg-[#F5B800]"></div>
+                    <div class="terminal-dot bg-[#3FB950]"></div>
+                    <span class="text-xs text-[#8b949e] ml-2 font-mono">Terminal Edition</span>
+                </div>
+                <div class="terminal-body text-sm md:text-base" dir="ltr">
+                    <span class="text-[#3FB950]">gnutux@arch</span>:<span class="text-[#79C0FF]">~</span>$ ./GT-IpNet --scan<br>
+                    <span class="text-amber-400">⚡ Quick Scan Mode (arp-scan)</span><br>
+                    <span class="text-gray-400">Interface: wlp2s0</span><br>
+                    <span class="text-gray-400">Found 8 active hosts</span><br>
+                    <span class="text-white">192.168.1.1   00:11:22:33:44:55   Cisco Systems</span><br>
+                    <span class="text-white">192.168.1.101  AA:BB:CC:DD:EE:FF   Apple, Inc.</span><br>
+                    <span class="text-gray-400">──────────────────────────────</span><br>
+                    <span class="text-[#3FB950]">✓ Scan complete (3.1s)</span><br>
+                    <span class="blink-cursor"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack / Under the Hood -->
+    <section id="stack" class="py-20 bg-[#0d1117]/50 border-y border-[#2a2d35]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">تحت <span class="text-[#BC8CFF]">الغطاء</span></h2>
+                <p class="text-xl text-[#8b949e]">المكدس التقني المستخدم في بناء الواجهة الرسومية الجديدة.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div class="bg-[#13161a] rounded-xl p-6 border border-[#2a2d35]">
+                    <i class="fa-brands fa-electron text-4xl text-[#79C0FF] mb-3"></i>
+                    <p class="font-bold text-white">Electron 31</p>
+                    <p class="text-xs text-[#8b949e]">Shell</p>
+                </div>
+                <div class="bg-[#13161a] rounded-xl p-6 border border-[#2a2d35]">
+                    <i class="fa-brands fa-react text-4xl text-[#79C0FF] mb-3"></i>
+                    <p class="font-bold text-white">React 18</p>
+                    <p class="text-xs text-[#8b949e]">Frontend</p>
+                </div>
+                <div class="bg-[#13161a] rounded-xl p-6 border border-[#2a2d35]">
+                    <i class="fa-brands fa-js text-4xl text-[#F5B800] mb-3"></i>
+                    <p class="font-bold text-white">TypeScript 5</p>
+                    <p class="text-xs text-[#8b949e]">Language</p>
+                </div>
+                <div class="bg-[#13161a] rounded-xl p-6 border border-[#2a2d35]">
+                    <i class="fas fa-paint-brush text-4xl text-[#3FB950] mb-3"></i>
+                    <p class="font-bold text-white">Tailwind v4</p>
+                    <p class="text-xs text-[#8b949e]">Styling</p>
+                </div>
+                <div class="bg-[#13161a] rounded-xl p-6 border border-[#2a2d35]">
+                    <i class="fas fa-box text-4xl text-[#BC8CFF] mb-3"></i>
+                    <p class="font-bold text-white">Zustand 4</p>
+                    <p class="text-xs text-[#8b949e]">State</p>
+                </div>
+            </div>
+
+            <div class="mt-12 max-w-3xl mx-auto terminal-frame text-left" dir="ltr">
+                <div class="terminal-header">
+                    <span class="text-xs text-[#8b949e] font-mono">🔒 Secure Architecture (Main → Preload → Renderer)</span>
+                </div>
+                <div class="terminal-body text-sm">
+                    <span class="text-[#8b949e]">// Zero Node.js access in renderer (React)</span><br>
+                    <span class="text-[#79C0FF]">contextBridge</span> → <span class="text-[#3FB950]">window.api</span><br>
+                    <span class="text-[#8b949e]">// All shell commands run exclusively in Main Process</span><br>
+                    <span class="text-white">ipcMain.handle('network:scan', async () => {</span><br>
+                    <span class="text-white">    return execCommand('arp-scan --localnet');</span><br>
+                    <span class="text-white">});</span><br>
+                    <span class="blink-cursor"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-[#2a2d35] text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-center items-center gap-4 mb-6">
+                <img src="icon.png" alt="GT-IpNet" class="w-12 h-12 rounded-xl border border-[#2a2d35]">
+                <span class="text-2xl font-bold text-white">GT-IpNet</span>
+            </div>
+            <p class="text-[#8b949e] mb-4">
+                طوّر بواسطة <a href="https://github.com/SalehGNUTUX" target="_blank" class="text-[#79C0FF] hover:underline font-semibold">GNUTUX</a>
+                <span class="mx-2">|</span>
+                مرخّص تحت <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_blank" class="text-[#3FB950] hover:underline font-mono">GPLv2</a>
+            </p>
+            <p class="text-xs text-[#484f58]">
+                © 2026 GT-IpNet Project. جميع الحقوق محفوظة. ✨ لأن أدوات الشبكة يجب أن تكون حرة.
+            </p>
+            <div class="flex justify-center gap-6 mt-6 text-2xl text-[#8b949e]">
+                <a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-[#79C0FF] transition-colors"><i class="fas fa-globe"></i></a>
+                <a href="#" class="hover:text-[#F85149] transition-colors"><i class="fab fa-mastodon"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
