@@ -10,6 +10,7 @@
     <meta property="og:description" content="واجهة رسومية حديثة لتشخيص وإدارة الشبكة المحلية. ثنائي اللغة، آمن، ومفتوح المصدر.">
     <meta property="og:image" content="icon.png">
     <meta property="og:url" content="https://salehgnutux.github.io/GT-IpNet/">
+    <link rel="icon" type="image/png" href="icon.png">
 
     <script src="https://cdn.tailwindcss.com">
     </script>
@@ -389,25 +390,6 @@
                     <i class="fab fa-github"></i> <span data-i18n="heroSource">تصفح الكود المصدري</span>
                 </a>
             </div>
-
-            <!-- Terminal Preview -->
-            <div class="max-w-2xl mx-auto terminal-frame text-left" dir="ltr">
-                <div class="terminal-header">
-                    <div class="terminal-dot" style="background: #f85149;"></div>
-                    <div class="terminal-dot" style="background: #d29922;"></div>
-                    <div class="terminal-dot" style="background: #3fb950;"></div>
-                    <span class="text-xs text-[#8b949e] ml-2 font-mono">terminal — gnutux@debian:~</span>
-                </div>
-                <div class="terminal-body">
-                    <span style="color: #3fb950;">gnutux@debian</span>:<span style="color: #58a6ff;">~</span>$ ./GT-IpNet --scan<br>
-                    <span style="color: #8b949e;" data-i18n="termInfo">[INFO] Starting network discovery on</span> <span style="color: #d29922;">wlan0</span>...<br>
-                    <span style="color: #58a6ff;" data-i18n="termDiscovery">[DISCOVERY] Found</span> <span style="color: #3fb950;">12 <span data-i18n="termDevices">devices</span></span> in 2.4s<br>
-                    <span style="color: #3fb950;">✓</span> <span data-i18n="termLine1">192.168.1.1 — Gateway (Router)</span><br>
-                    <span style="color: #3fb950;">✓</span> <span data-i18n="termLine2">192.168.1.105 — iPhone 13 Pro</span><br>
-                    <span style="color: #8b949e;">──────────────────────────────────────────</span><br>
-                    <span style="color: #3fb950;" data-i18n="termComplete">Scan complete. Ready for advanced diagnostics.</span><span class="blink-cursor"></span>
-                </div>
-            </div>
         </div>
     </header>
 
@@ -494,13 +476,42 @@
             <div class="lg:w-1/2">
                 <div class="inline-flex items-center gap-2 badge badge-linux mb-6"><i class="fas fa-terminal"></i> <span data-i18n="navTerminal">💻 النسخة الطرفية</span></div>
                 <h2 class="text-4xl font-bold mb-6"><span data-i18n="terminalTitle">محبّذ</span> <span class="text-[#3fb950]" data-i18n="terminalTitle">للطرفية</span>؟</h2>
-                <p class="text-lg text-[#8b949e] mb-8 leading-relaxed" data-i18n="terminalDesc">GT-IpNet بدأ كبرنامج نصي للطرفية (Shell Script) ولا يزال متاحاً للمستخدمين المتقدمين. النسخة القديمة تدعم جميع الميزات الأساسية مباشرة من سطر الأوامر.</p>
-                <div class="space-y-4 mb-8">
+                <p class="text-lg text-[#8b949e] mb-4 leading-relaxed" data-i18n="terminalDesc">GT-IpNet بدأ كبرنامج نصي للطرفية (Shell Script) ولا يزال متاحاً للمستخدمين المتقدمين. النسخة القديمة تدعم جميع الميزات الأساسية مباشرة من سطر الأوامر.</p>
+                
+                <!-- Terminal version features -->
+                <p class="text-sm font-bold text-[#d29922] mb-2" data-i18n="terminalVersionFeaturesTitle">📦 المميزات الرئيسية | Key Features</p>
+                <ul class="text-sm text-[#8b949e] mb-4 space-y-1 list-disc list-inside">
+                    <li data-i18n="terminalVersionFeature1">فحص شامل لشبكتك المحلية</li>
+                    <li data-i18n="terminalVersionFeature2">دعم متعدد اللغات (العربية/الإنجليزية)</li>
+                    <li data-i18n="terminalVersionFeature3">واجهة سهلة الاستخدام</li>
+                    <li data-i18n="terminalVersionFeature4">تقارير مفصلة تلقائية</li>
+                </ul>
+                
+                <div class="space-y-4 mb-4">
                     <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border-color);"><span class="text-[#3fb950] text-xl"><i class="fas fa-check-circle"></i></span><div><p class="text-white font-semibold" data-i18n="termFeature1">مسح سريع للشبكة</p><code class="text-sm" data-i18n="termCode1">./GT-IpNet --scan</code></div></div>
                     <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border-color);"><span class="text-[#3fb950] text-xl"><i class="fas fa-check-circle"></i></span><div><p class="text-white font-semibold" data-i18n="termFeature2">إنشاء تقرير فوري</p><code class="text-sm" data-i18n="termCode2">./GT-IpNet --report</code></div></div>
                     <div class="flex items-center gap-3 p-4 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border-color);"><span class="text-[#3fb950] text-xl"><i class="fas fa-check-circle"></i></span><div><p class="text-white font-semibold" data-i18n="termFeature3">تحديد اللغة</p><code class="text-sm" data-i18n="termCode3">LANG=ar ./GT-IpNet</code></div></div>
                 </div>
-                <div class="flex flex-wrap gap-3"><a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="btn-outline"><i class="fab fa-github"></i> <span data-i18n="terminalSourceBtn">الكود المصدري للنسخة الطرفية</span></a></div>
+
+                <!-- Terminal version quick install -->
+                <div class="mb-6">
+                    <p class="text-sm font-bold text-[#d29922] mb-2" data-i18n="terminalVersionQuickInstallTitle">📥 التثبيت السريع | Quick Install</p>
+                    <div class="terminal-frame text-left" dir="ltr">
+                        <div class="terminal-body text-sm">
+                            <span style="color: #c9d1d9;">git clone https://github.com/gnutux/GT-IpNet.git</span><br>
+                            <span style="color: #c9d1d9;">cd GT-IpNet</span><br>
+                            <span style="color: #c9d1d9;">chmod +x gtipnet.sh</span><br>
+                            <span style="color: #c9d1d9;">sudo ./gtipnet.sh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet" target="_blank" class="btn-outline"><i class="fab fa-github"></i> <span data-i18n="terminalSourceBtn">الكود المصدري للنسخة الطرفية</span></a>
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/tag/GT-IpNet.V0.1" target="_blank" class="btn-outline"><i class="fas fa-download"></i> <span data-i18n="terminalVersionReleaseBtn">صفحة الإصدار V0.1</span></a>
+                    <a href="https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage" target="_blank" class="btn-outline"><i class="fas fa-box"></i> <span data-i18n="terminalVersionAppImageBtn">تحميل AppImage V0.1</span></a>
+                </div>
+
                 <div class="mt-8 p-6 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border-color);"><h4 class="text-sm font-bold text-[#8b949e] mb-3 flex items-center gap-2"><i class="fas fa-box-open text-[#d29922]"></i> <span data-i18n="terminalReqs">المتطلبات الأساسية</span></h4><div class="grid grid-cols-2 gap-2 text-sm"><span class="text-[#8b949e]" data-i18n="termDebian">Debian/Ubuntu:</span><code class="text-xs" data-i18n="termCmdDeb">sudo apt install arp-scan nmap</code><span class="text-[#8b949e]" data-i18n="termArch">Arch Linux:</span><code class="text-xs" data-i18n="termCmdArch">sudo pacman -S arp-scan nmap</code></div></div>
             </div>
             <div class="lg:w-1/2 w-full">
@@ -610,6 +621,14 @@
                 quickInstallRPM: "# أو ثبّت RPM على Fedora/RHEL",
                 terminalTitle: "محبّذ للطرفية؟",
                 terminalDesc: "GT-IpNet بدأ كبرنامج نصي للطرفية (Shell Script) ولا يزال متاحاً للمستخدمين المتقدمين. النسخة القديمة تدعم جميع الميزات الأساسية مباشرة من سطر الأوامر.",
+                terminalVersionFeaturesTitle: "📦 المميزات الرئيسية | Key Features",
+                terminalVersionFeature1: "فحص شامل لشبكتك المحلية",
+                terminalVersionFeature2: "دعم متعدد اللغات (العربية/الإنجليزية)",
+                terminalVersionFeature3: "واجهة سهلة الاستخدام",
+                terminalVersionFeature4: "تقارير مفصلة تلقائية",
+                terminalVersionQuickInstallTitle: "📥 التثبيت السريع | Quick Install",
+                terminalVersionReleaseBtn: "صفحة الإصدار V0.1",
+                terminalVersionAppImageBtn: "تحميل AppImage V0.1",
                 termFeature1: "مسح سريع للشبكة",
                 termFeature2: "إنشاء تقرير فوري",
                 termFeature3: "تحديد اللغة",
@@ -713,6 +732,14 @@
                 quickInstallRPM: "# Or install RPM on Fedora/RHEL",
                 terminalTitle: "Prefer the Terminal?",
                 terminalDesc: "GT-IpNet started as a shell script and is still available for advanced users. The old version supports all core features directly from the command line.",
+                terminalVersionFeaturesTitle: "📦 Key Features",
+                terminalVersionFeature1: "Comprehensive local network scan",
+                terminalVersionFeature2: "Multi-language support (Arabic/English)",
+                terminalVersionFeature3: "Easy-to-use interface",
+                terminalVersionFeature4: "Automatic detailed reports",
+                terminalVersionQuickInstallTitle: "📥 Quick Install",
+                terminalVersionReleaseBtn: "V0.1 Release Page",
+                terminalVersionAppImageBtn: "Download AppImage V0.1",
                 termFeature1: "Quick Network Scan",
                 termFeature2: "Generate Instant Report",
                 termFeature3: "Set Language",
