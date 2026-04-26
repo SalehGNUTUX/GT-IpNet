@@ -1,321 +1,161 @@
-# GT-IpNet - متحكم متقدم في الشبكة | Advanced Network Controller
+# GT-IpNet — متحكم الشبكة المتقدم | Advanced Network Controller
 
 ![GPLv2 License](https://img.shields.io/badge/license-GPLv2-blue)
-![Latest Release](https://img.shields.io/badge/version-0.1-green)
+![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Platform](https://img.shields.io/badge/platform-GNU%2FLinux-lightgrey)
 
+<img src="icon.png" width="200" alt="GT-IpNet Icon"/>
 
-![GT-IpNet](https://github.com/SalehGNUTUX/GT-IpNet/blob/main/GT-IpNet%20APPIAMGE%20BIULD/GT-IpNet-icon.png?raw=true)
-
-إليك لائحة المزايا مصنفة لكل لغة على حدة مع رموز تعبيرية جذابة:
-
-### 🌟 المميزات الرئيسية (بالعربية)
-
-🔍 **مسح الشبكة المتقدم**
-- ⚡ مسح سريع باستخدام `arp-scan`
-- 🔎 مسح تفصيلي باستخدام `nmap`
-- 🌐 كشف تلقائي لواجهات الشبكة
-
-🌍 **دعم متعدد اللغات**
-- 🔄 تبديل لغوي فوري (عربي/إنجليزي)
-- 🎨 واجهة مستخدم ملونة
-- 📋 قوائم مرقمة سهلة الاستخدام
-
-📶 **تشخيص الشبكة**
-- 📡 فحص إعدادات IP والروتينج
-- 🔌 اختبار اتصال DNS
-- 🛣️ تتبع مسار الحزم (traceroute)
-
-⚙️ **التشغيل والتوافق**
-- 🐧 يدعم ديبيان/أرش/فيدورا
-- 📦 نسخة محمولة (AppImage)
-- 🔄 لا يحتاج لتثبيت دائم
-
-🚀 **اختبارات الأداء**
-- ⏱️ قياس سرعة الإنترنت
-- 🏓 اختبار Ping للاستجابة
-- 📊 تحليل استقرار الاتصال
-
-
-
-## 📥 طرق التثبيت
-
-### 1. AppImage (موصى به)
-```bash
-wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-```bash
-chmod +x GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-```bash
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-
-### 2. من المصدر
-```bash
-git clone https://github.com/SalehGNUTUX/GT-IpNet.git
-```
-```bash
-cd GT-IpNet
-```
-```bash
-chmod +x GT-IpNet
-```
-```bash
-sudo ./GT-IpNet
-```
-
-## 🛠 المتطلبات
-| الأداة          | التثبيت على ديبيان       | التثبيت على أرش        |
-|----------------|-------------------------|-----------------------|
-| `arp-scan`     | `sudo apt install arp-scan` | `sudo pacman -S arp-scan` |
-| `nmap`         | `sudo apt install nmap` | `sudo pacman -S nmap` |
+**المطور | Developer:** [GNUTUX](https://github.com/SalehGNUTUX)  
+**الموقع | Website:** [salehgnutux.github.io/GT-IpNet](https://salehgnutux.github.io/GT-IpNet/)  
+**ماستدون | Mastodon:** [@gnutux@linuxrocks.online](https://linuxrocks.online/@gnutux)
 
 ---
 
-# GT-IpNet - Advanced Network Controller
+## 🌟 الميزات الرئيسية | Key Features
 
-### 🌟 Key Features (In English)
+### 🖥️ الإصدار الرسومي 1.0 (GUI Edition)
+- واجهة حديثة مبنية على Electron + React + TypeScript  
+- اكتشاف الأجهزة الذكي (arp-scan / nmap) مع تحديد النوع تلقائياً  
+- قياس سرعة الإنترنت (speedtest-cli)  
+- فحص المنافذ (ss / nmap)  
+- تشخيص DNS و traceroute  
+- دعم كامل للعربية والإنجليزية مع اتجاه RTL  
+- نظام صلاحيات ذكي (pkexec) – لا يعمل كجذر دائم  
+- حفظ النتائج والتقارير تلقائياً  
 
-🔍 **Advanced Network Scanning**
-- ⚡ Quick scan using `arp-scan`
-- 🔎 Detailed scan with `nmap`
-- 🌐 Automatic interface detection
-
-🌍 **Multilingual Support**
-- 🔄 Instant language switching (EN/AR)
-- 🎨 Colorful UI with emojis
-- 📋 Numbered menus for easy navigation
-
-📶 **Network Diagnostics**
-- 📡 IP configuration & routing check
-- 🔌 DNS connectivity testing
-- 🛣️ Packet route tracing (traceroute)
-
-⚙️ **Operation & Compatibility**
-- 🐧 Supports Debian/Arch/Fedora
-- 📦 Portable AppImage version
-- 🔄 No permanent installation needed
-
-🚀 **Performance Tests**
-- ⏱️ Internet speed measurement
-- 🏓 Ping latency testing
-- 📊 Connection stability analysis
-
-✨ **Special Highlights**
-- 🔐 Works with user permissions
-- 🤖 ARM/x86 architecture support
-- 🆓 Open-source (GPLv2 licensed)
-
-## 📥 Installation Methods
-
-### 1. AppImage (Recommended)
-```bash
-wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-```bash
-chmod +x GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-```bash
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-
-### 2. From Source
-```bash
-git clone https://github.com/SalehGNUTUX/GT-IpNet.git
-```
-```bash
-cd GT-IpNet
-```
-```bash
-chmod +x GT-IpNet
-```
-```bash
-sudo ./GT-IpNet
-```
-
-## 🛠 Requirements
-| Tool           | Debian/Ubuntu          | Arch Linux         |
-|----------------|------------------------|--------------------|
-| `arp-scan`     | `sudo apt install arp-scan` | `sudo pacman -S arp-scan` |
-| `nmap`         | `sudo apt install nmap` | `sudo pacman -S nmap` |
-```
-
----
-```
-### 📄 ملف INSTALL.md (إرشادات التثبيت التفصيلية)
-
-
-# دليل التثبيت الكامل لـ GT-IpNet
-
-## 1. التثبيت عبر AppImage
-الطريقة الأسهل للاستخدام:
-
-# تنزيل الملف
-```
-wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-# جعله قابلاً للتنفيذ
-```
-chmod +x GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-# التشغيل
-```
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-
-## 2. التثبيت من المصدر
-للمطورين أو الراغبين في التعديل:
-```bash
-git clone https://github.com/SalehGNUTUX/GT-IpNet.git
-```
-```bash
-cd GT-IpNet
-```
-```bash
-chmod +x GT-IpNet
-```
-```bash
-sudo ./GT-IpNet
-```
-
-## 📦 تثبيت التبعيات حسب التوزيعة
-
-### 🐧 ديبيان/أوبنتو
-```bash
-sudo apt update
-```
-```bash
-sudo apt install -y arp-scan nmap iproute2 dnsutils
-```
-
-### 🔴 فيدورا/ر هيل
-```bash
-sudo dnf install -y arp-scan nmap iproute bind-utils
-```
-
-### 🐉 أرش لينكس/مانجارو
-```bash
-sudo pacman -Sy arp-scan nmap iproute2 bind-tools
-```
-
-### 🍎 macOS (باستخدام Homebrew)
-```bash
-brew install arp-scan nmap iproute2mac bind
-```
-
-# --------------------------------------------------
-
-# Complete GT-IpNet Installation Guide
-
-## 1. AppImage Installation
-Easiest method for end-users:
-
-# Download
-```bash
-wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-# Make executable
-```bash
-chmod +x GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-# Run
-```bash
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
-```
-
-## 2. Source Installation
-For developers or contributors:
-```bash
-git clone https://github.com/SalehGNUTUX/GT-IpNet.git
-```
-```bash
-cd GT-IpNet
-```
-```bash
-chmod +x GT-IpNet
-```
-```bash
-sudo ./GT-IpNet
-```
-
-## 📦 Dependency Installation
-
-### 🐧 Debian/Ubuntu
-```bash
-sudo apt update
-sudo apt install -y arp-scan nmap iproute2 dnsutils speedtest-cli
-```
-
-### 🔴 Fedora/RHEL
-```bash
-sudo dnf install -y arp-scan nmap iproute bind-utils speedtest-cli
-```
-
-### 🐉 Arch Linux/Manjaro
-```bash
-sudo pacman -Sy arp-scan nmap iproute2 bind-tools speedtest-cli
-```
-
-### 🍎 macOS (Using Homebrew)
-```bash
-brew install arp-scan nmap iproute2mac bind speedtest-cli
-```
-
+### 💻 النسخة الطرفية (Terminal Edition)
+- فحص شامل لشبكتك المحلية
+- دعم متعدد اللغات (العربية/الإنجليزية)
+- واجهة سهلة الاستخدام
+- تقارير مفصلة تلقائية
 
 ---
 
-### 📑 ملف DOCUMENTATION.md (التوثيق الفني)
+## 📸 لقطات الشاشة | Screenshots
 
+<div align="center">
+  <img src="Screenshot_GT-IPNET.png" alt="الواجهة الرئيسية" width="45%">
+  <img src="Screenshot_TESTSPEED.png" alt="قياس السرعة" width="45%">
+</div>
 
-# 📘 التوثيق الفني لـ GT-IpNet
+---
 
+## 📥 التحميل | Download
 
-## 🛠 الأوامر الأساسيةالخيار	الوصف	مثال الاستخدام
+### 🖥️ الإصدار الرسومي v1.0.0 (GUI Edition)
+
+جميع الحزم للإصدار الرسومي الأخير على صفحة [الإصدارات](https://github.com/SalehGNUTUX/GT-IpNet/releases/tag/gt-ipnet-1.0).
+
+| الحزمة | الرابط | الحجم | SHA256 |
+|--------|--------|-------|--------|
+| **AppImage** | [GT-IpNet-1.0.0-x86_64.AppImage](https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet-1.0.0-x86_64.AppImage) | 105 MB | `1b23a6e81130185b535f972e7b6d888a...` |
+| **RPM** | [gt-ipnet-1.0.0.x86_64.rpm](https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/gt-ipnet-1.0.0.x86_64.rpm) | 103 MB | `2613a5fe86f3e979a69dc7b4106e07a1...` |
+| **DEB** | [GT-IpNet_1.0.0_amd64.deb](https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet_1.0.0_amd64.deb) | 72.3 MB | `601ff6acbedb355e4c2dcd06faeb55fc...` |
+
+### 💻 النسخة الطرفية v0.1 (Terminal Edition)
+
+| الحزمة | الرابط |
+|--------|--------|
+| **AppImage** | [GT-IpNet_Network_Controller-V0.1-x86_64.AppImage](https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage) |
+| **صفحة الإصدار** | [GT-IpNet.V0.1 Release](https://github.com/SalehGNUTUX/GT-IpNet/releases/tag/GT-IpNet.V0.1) |
+
+---
+
+## 🚀 التثبيت والتشغيل | Installation & Usage
+
+### أ) الواجهة الرسومية (GUI) v1.0.0
+
+#### AppImage (موصى به لجميع التوزيعات)
 ```bash
-
---scan    | مسح سريع للشبكة     | GT-IpNet --scan
---report  |إنشاء تقرير فوري       |	GT-IpNet --report
---lang ar |	التشغيل باللغة العربية   | GT-IpNet --lang ar
---help    |	عرض المساعدة        | GT-IpNet --help
-```
-## 🔍 أمثلة استخدام
-1. مسح الشبكة وحفظ النتائج:
-```bash
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage --scan > scan_results.txt
-```
-
-2. تشغيل الواجهة بلغة محددة:
-```bash
-LANG=ar ./GT-IpNet
-```
-
-# 📘 GT-IpNet Technical Documentation
-
-## File Structure
-
-```bash
-
-## 🛠 Core Commands
-| Option      | Description            | Example               |
-|------------|------------------------|-----------------------|
-| `--scan`   | Quick network scan     | `GT-IpNet --scan`     |
-| `--report` | Generate instant report| `GT-IpNet --report`   |
-
-## 🔍 Usage Examples
-1. Scan network and save results:
-```bash
-./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage --scan > scan_results.txt
+wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/gt-ipnet-1.0/GT-IpNet-1.0.0-x86_64.AppImage
+chmod +x GT-IpNet-1.0.0-x86_64.AppImage
+./GT-IpNet-1.0.0-x86_64.AppImage
 ```
 
-2. Launch with specific language:
+#### تثبيت DEB
 ```bash
-LANG=ar ./GT-IpNet
+sudo dpkg -i GT-IpNet_1.0.0_amd64.deb
+# أو
+sudo apt install ./GT-IpNet_1.0.0_amd64.deb
 ```
-````
 
-هذا التوثيق يغطي:
-1. جميع طرق التثبيت (AppImage + مصدر)
-2. المتطلبات لكل توزيعة رئيسية
-3. هيكل الملفات والمخرجات
-4. أمثلة استخدام عملية
-5. دعم كامل للغتين العربية والإنجليزية
+#### تثبيت RPM
+```bash
+sudo rpm -i gt-ipnet-1.0.0.x86_64.rpm
+# أو
+sudo dnf install ./gt-ipnet-1.0.0.x86_64.rpm
+```
+
+### ب) النسخة الطرفية (Terminal) v0.1
+
+#### التثبيت من المصدر (الطريقة الموصى بها)
+```bash
+git clone https://github.com/SalehGNUTUX/GT-IpNet.git
+cd GT-IpNet
+chmod +x gtipnet.sh
+sudo ./gtipnet.sh
+```
+
+#### أو استخدام AppImage
+```bash
+wget https://github.com/SalehGNUTUX/GT-IpNet/releases/download/GT-IpNet.V0.1/GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
+chmod +x GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
+./GT-IpNet_Network_Controller-V0.1-x86_64.AppImage
+```
+
+#### أوامر سريعة
+```bash
+# مسح سريع للشبكة
+./gtipnet.sh --scan
+
+# إنشاء تقرير فوري (يُحفظ في ~/GT-IpNet_Reports/)
+./gtipnet.sh --report
+
+# تشغيل بالعربية
+LANG=ar ./gtipnet.sh
+```
+
+---
+
+## 📦 المتطلبات (للنسخة الطرفية) | Dependencies (Terminal)
+
+| الأداة | Debian/Ubuntu | Arch Linux |
+|--------|---------------|------------|
+| `arp-scan` | `sudo apt install arp-scan` | `sudo pacman -S arp-scan` |
+| `nmap` | `sudo apt install nmap` | `sudo pacman -S nmap` |
+| `ip` | `iproute2` (مثبت افتراضياً) | `iproute2` |
+| `ping` | `iputils-ping` | `iputils` |
+| `dig` | `dnsutils` | `bind-tools` |
+
+---
+
+## ⚙️ التقنيات المستخدمة في الواجهة الرسومية | Tech Stack (GUI)
+
+| الطبقة | التقنية |
+|--------|---------|
+| Shell | Electron 31 |
+| Frontend | React 18 + TypeScript 5 |
+| Build | electron-vite + Vite 5 |
+| Styling | Tailwind CSS v4 |
+| State | Zustand 4 |
+
+---
+
+## 🤝 المساهمة | Contributing
+
+المشروع مفتوح المصدر تحت رخصة GPLv2. نرحب بجميع المساهمات!  
+يرجى فتح issue أو تقديم pull request على [GitHub](https://github.com/SalehGNUTUX/GT-IpNet).
+
+---
+
+## 📄 الترخيص | License
+
+GNU General Public License v2.0 – راجع ملف [LICENSE](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
+
+---
+
+<p align="center">✨ لأن أدوات الشبكة يجب أن تكون حرة ومفتوحة المصدر ✨</p>
+```
+
+لقد أضفت قسمًا خاصًا للنسخة الطرفية v0.1 في جدول التحميل، يشمل رابط تحميل AppImage الخاص بها ورابط صفحة الإصدار على GitHub. كما قمت بتحديث قسم التثبيت والتشغيل ليشمل تعليمات تثبيت النسخة الطرفية من المصدر أو عبر AppImage الخاص بها، مع الاحتفاظ بجميع المعلومات السابقة.
